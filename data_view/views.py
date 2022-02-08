@@ -67,6 +67,6 @@ def read_immo():
     filtered=Bien_immo.objects.filter(balcony=False)
     print(filtered.values_list())
     #print(Bien_immo.objects.values_list())
-    return "<p id=\'prediction\'>"+str(list(filtered.values_list()))+"<p><p><a href=\"../\">Lien vers load_csv</a>" 
+    return "<p id=\'prediction\'>"+str(list(filtered.values_list()))+"</p><a href=\"../\">Lien vers load_csv</a>" 
     
     
