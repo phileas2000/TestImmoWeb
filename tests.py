@@ -29,20 +29,20 @@ def test_should_status_code_ok():
 
 
 def test_should_return_data():
-
+	
 	file =open("immo_CSV.csv","rb")
-	requests.post(url,file.read())
-
+	response = requests.post(url,file.read())
+	assert str(response) == "<Response [200]>"
 	data_normal=pd.read_csv('static/immo_CSV.csv',delimiter=";")
 	data=pd.read_csv('immo_CSV.csv',delimiter=";")
-	assert data == data_normal
+	assert data.equals(data_normal)
 	response = requests.get(url+"/data_view")
-	assert response == 200
+	assert str(response) == "<Response [200]>"
 	#print(response)
 	s=soup(response)
-	#print(s)
 	res=s.find(id="prediction")
-	assert '[(1, "59_0_Lalcve_Bouygues, 3, Appartement, 178823.0, 203400.5687, 169500.47, 2849.71, 3419.65, N, False, False, False, 1, Clermont-Ferrand, 63, aout 2023, 91 RUE DE LA GANTIERE 63000 Clermont-Ferrand, datetime.date(2021, 7, 21))]' in res.replace('"','').replace("'",'')
+	print(res)
+	assert '[(1, "59_0_Lalcve_Bouygues, 3, Appartement, 178823.0, 203400.5687, 169500.47, 2849.71, 3419.65, N, False, False, False, 1, Clermont-Ferrand, 63, aout 2023, 91 RUE DE LA GANTIERE 63000 Clermont-Ferrand, datetime.date(2021, 7, 21))]' in str(res).replace('"','')
 
 
 test_should_return_data()
